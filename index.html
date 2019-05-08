@@ -139,10 +139,10 @@ var velocity = [.015, -0];
   
 var lineToBergamo = function(d) {
   return path({"type": "LineString", "coordinates": [bergamo, d.geometry.coordinates]});
-  var distance = Math.round(d3.geoDistance(d.geometry.coordinates, bergamo) * 6371 * 0.115);
-  var lineWidth = Math.round((distance / 1900) * 10);
-  d3.select("g.lines").select("#" + name).style("stroke-width", lineWidth);
-  d3.select("g.lines").select("#" + name).style("fill": d.pollution);
+  // var distance = Math.round(d3.geoDistance(d.geometry.coordinates, bergamo) * 6371 * 0.115);
+  // var lineWidth = Math.round((distance / 1900) * 10);
+  // d3.select("g.lines").select("#" + name).style("stroke-width", lineWidth);
+  // d3.select("g.lines").select("#" + name).style("fill": d.pollution);
 
 }
 
