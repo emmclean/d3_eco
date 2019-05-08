@@ -140,7 +140,7 @@ function ready(error, world, places) {
       .text(d => d.properties.name)
       .on("mouseover", (d) => {
         var distance = Math.round(d3.geoDistance(d.geometry.coordinates, bergamo) * 6371 * 0.115);
-        var lineWidth = Math.round((distance / 1900) * 4);
+        var lineWidth = Math.round((distance / 1900) * 10);
         // For KG  * (1/907.185)
         d3.select("g.info").select("text.distance").text("Pollution generated from Bergamo to " + d.properties.name + ": ~" + distance + " kg");
         var name = stripWhitespace(d.properties.name);
