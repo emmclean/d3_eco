@@ -159,6 +159,9 @@ queue()
     .await(ready);
 
 function ready(error, world, places) {
+  console.log(error)
+  console.log(places)
+  console.log(world)
     svg.append("circle")
         .attr("cx", width / 2)
         .attr("cy", height / 2)
