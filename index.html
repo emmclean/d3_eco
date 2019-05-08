@@ -148,7 +148,7 @@ function ready(error, world, places) {
       .on("mouseout", (d) => {
         var name = stripWhitespace(d.properties.name);
         d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3)
-        d3.select("g.info").select("text.distance").text("See how much pollution is generated on your flight: Hover Over A Location");
+        d3.select("g.info").select("text.distance").text("See how much pollution is generated on your flight:</br> Hover Over A Location");
       });
   
     svg.append("g").attr("class","countries")
