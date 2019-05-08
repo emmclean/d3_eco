@@ -164,8 +164,9 @@ function ready(error, world, places) {
     svg.append("g").attr("class", "info")
       .append("text")
       .attr("class", "distance")
-      .attr("x", width / 30)
+      .attr("x", width / 20)
       .attr("y", height * 0.9)
+      .attr("width", width / 10)
       .attr("text-anchor", "start")
       .style("font-size", "12px")
       .text("See how much pollution is generated on your flight: Hover Over A Location");  
