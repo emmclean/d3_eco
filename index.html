@@ -138,14 +138,14 @@ function ready(error, world, places) {
       .enter().append("text")
       .attr("class", "label")
       .text(d => d.properties.name)
+      var lineWidth = Math.round((distance / 1900) * 10);
+      d3.select("g.lines").select("#" + name).style("stroke-width", lineWidth)
       .on("mouseover", (d) => {
         var distance = Math.round(d3.geoDistance(d.geometry.coordinates, bergamo) * 6371 * 0.115);
-        var lineWidth = Math.round((distance / 1900) * 10);
         // For KG  * (1/907.185)
         d3.select("g.info").select("text.distance").text("Pollution generated from Bergamo to " + d.properties.name + ": ~" + distance + " kg");
         var name = stripWhitespace(d.properties.name);
         d3.select("g.lines").select("#" + name).style("stroke-opacity", 1)
-        d3.select("g.lines").select("#" + name).style("stroke-width", lineWidth)
       })
       .on("mouseout", (d) => {
         var name = stripWhitespace(d.properties.name);
