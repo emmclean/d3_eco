@@ -1,7 +1,29 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
-  
+
+ .quickTips {
+  background-color: #e8f4fb;
+  position: absolute;
+  left: 960px;
+  width: 960px;
+  height: 800px;
+ } 
+
+ .quickTips h1{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: #253b56;
+  padding-top: 16px;
+ }
+
+ .quickTips ol{
+  font-family: 'Roboto', sans-serif;
+  color: #253b56;
+  padding-top: 16px;
+  padding-left: 32px;
+ }
+
 .land {
   fill: white;
   opacity: .5;
@@ -57,6 +79,15 @@ circle {
 <script src="https://d3js.org/queue.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v0.min.js"></script>
 <script src="versor.js"></script>
+
+<div class="quickTips">
+  <h1>Quick Tips</h1>
+  <ol>
+    <li>Coffee</li>
+    <li>Tea</li>
+    <li>Milk</li>
+  </ol>
+</div>
 
 <script>
 
