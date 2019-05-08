@@ -74,14 +74,14 @@ var path = d3.geoPath().projection(proj).pointRadius(1.5);
 
 var graticule = d3.geoGraticule();
   
-var london = [-0.118667702475932, 51.5019405883275];
+var bergamo = [45.6983, 9.6773];
   
 var time = Date.now();
 var rotate = [39.666666666666664, -30];
 var velocity = [.015, -0];
   
-var lineToLondon = function(d) {
-  return path({"type": "LineString", "coordinates": [london, d.geometry.coordinates]});
+var lineToBergamo = function(d) {
+  return path({"type": "LineString", "coordinates": [bergamo, d.geometry.coordinates]});
 }
 
 function stripWhitespace(str) {
@@ -130,7 +130,7 @@ function ready(error, world, places) {
       .enter().append("path")
         .attr("class", "lines")
         .attr("id", d => stripWhitespace(d.properties.name))
-        .attr("d", d => lineToLondon(d));
+        .attr("d", d => lineToBergamo(d));
 
 
     svg.append("g").attr("class","labels")
@@ -139,15 +139,15 @@ function ready(error, world, places) {
       .attr("class", "label")
       .text(d => d.properties.name)
       .on("mouseover", (d) => {
-        var distance = Math.round(d3.geoDistance(d.geometry.coordinates, london) * 6371);
-        d3.select("g.info").select("text.distance").text("Distance from London: ~" + distance + "km");
+        var distance = Math.round(d3.geoDistance(d.geometry.coordinates, bergamo) * 6371);
+        d3.select("g.info").select("text.distance").text("Flight Paths out of Bergamo: ~" + distance + "km");
         var name = stripWhitespace(d.properties.name);
         d3.select("g.lines").select("#" + name).style("stroke-opacity", 1)
       })
       .on("mouseout", (d) => {
         var name = stripWhitespace(d.properties.name);
         d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3)
-        d3.select("g.info").select("text.distance").text("Distance from London: Hover Over A Location");
+        d3.select("g.info").select("text.distance").text("Flight Path Pollution: Hover Over A Location");
       });
   
     svg.append("g").attr("class","countries")
@@ -165,7 +165,7 @@ function ready(error, world, places) {
       .attr("y", height * 0.9)
       .attr("text-anchor", "start")
       .style("font-size", "12px")
-      .text("Distance from London: Hover Over A Location");  
+      .text("Flight Path Pollution: Hover Over A Location");  
   
     refresh();
   
@@ -202,7 +202,7 @@ function refresh() {
   svg.selectAll(".countries path").attr("d", path);
   svg.selectAll(".graticule").attr("d", path);
   svg.selectAll(".point").attr("d", path);
-  svg.selectAll(".lines").attr("d", (d) => { if (d) { return lineToLondon(d); }});
+  svg.selectAll(".lines").attr("d", (d) => { if (d) { return lineToBergamo(d); }});
   position_labels();
 }
 
