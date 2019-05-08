@@ -3,35 +3,35 @@
 <style>
   
 .land {
- 	fill: white;
+  fill: white;
   opacity: .5;
-  stroke: #253b56;
+  stroke: #4f2291;
   stroke-opacity: 1;
 }
 
 .countries path {
-  stroke: #253b56;  
+  stroke: #4f2291;  
   stroke-linejoin: round;
-  stroke-width: .5;
-  fill: #253b56;
+  stroke-width:.5;
+  fill: #4f2291;
   opacity: .1;
   pointer-events:none;
 }
   
 .lines path {
   fill: none;
-  stroke: #1994d7;
+  stroke: #4f2291;
   stroke-opacity: 0.3;
-/*  stroke-dasharray: 5,5; */
+  stroke-dasharray: 5,5; 
 }
   
 circle {
-  stroke: #253b56;
+  stroke: #4f2291;
 }
   
 .graticule {
   fill: none;
-  stroke: #253b56;
+  stroke: #4f2291;
   stroke-width:.5;
   opacity:.2;
 }
@@ -53,9 +53,9 @@ circle {
 </style>
 
 <body>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://d3js.org/queue.v1.min.js"></script>
-<script src="https://d3js.org/topojson.v0.min.js"></script>
+<script src="http://d3js.org/d3.v4.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v0.min.js"></script>
 <script src="versor.js"></script>
 
 <script>
@@ -104,10 +104,10 @@ queue()
 function ready(error, world, places) {
     svg.append("circle")
         .attr("cx", width / 2)
-      	.attr("cy", height / 2)
+        .attr("cy", height / 2)
         .attr("r", proj.scale())
         .attr("class", "noclicks")
-    		.attr("fill", "none");
+        .attr("fill", "none");
     
     svg.append("path")
         .datum(topojson.object(world, world.objects.land))
@@ -125,11 +125,11 @@ function ready(error, world, places) {
         .attr("class", "point")
         .attr("d", path);
   
-  	svg.append("g").attr("class","lines")
+    svg.append("g").attr("class","lines")
         .selectAll(".lines").data(places.features)
       .enter().append("path")
         .attr("class", "lines")
-    		.attr("id", d => stripWhitespace(d.properties.name))
+        .attr("id", d => stripWhitespace(d.properties.name))
         .attr("d", d => lineToLondon(d));
 
 
@@ -139,16 +139,16 @@ function ready(error, world, places) {
       .attr("class", "label")
       .text(d => d.properties.name)
       .on("mouseover", (d) => {
-      	var distance = Math.round(d3.geoDistance(d.geometry.coordinates, london) * 6371);
-      	d3.select("g.info").select("text.distance").text("Distance from London: ~" + distance + "km");
-      	var name = stripWhitespace(d.properties.name);
-      	d3.select("g.lines").select("#" + name).style("stroke-opacity", 1)
-    	})
-    	.on("mouseout", (d) => {
-      	var name = stripWhitespace(d.properties.name);
-      	d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3)
+        var distance = Math.round(d3.geoDistance(d.geometry.coordinates, london) * 6371);
+        d3.select("g.info").select("text.distance").text("Distance from London: ~" + distance + "km");
+        var name = stripWhitespace(d.properties.name);
+        d3.select("g.lines").select("#" + name).style("stroke-opacity", 1)
+      })
+      .on("mouseout", (d) => {
+        var name = stripWhitespace(d.properties.name);
+        d3.select("g.lines").select("#" + name).style("stroke-opacity", 0.3)
         d3.select("g.info").select("text.distance").text("Distance from London: Hover Over A Location");
-    	});
+      });
   
     svg.append("g").attr("class","countries")
       .selectAll("path")
@@ -158,18 +158,18 @@ function ready(error, world, places) {
 
     position_labels();
   
-  	svg.append("g").attr("class", "info")
+    svg.append("g").attr("class", "info")
       .append("text")
-    	.attr("class", "distance")
+      .attr("class", "distance")
       .attr("x", width / 20)
       .attr("y", height * 0.9)
-    	.attr("text-anchor", "start")
-    	.style("font-size", "12px")
+      .attr("text-anchor", "start")
+      .style("font-size", "12px")
       .text("Distance from London: Hover Over A Location");  
   
-  	refresh();
+    refresh();
   
-  	spin();
+    spin();
 }
 
 
