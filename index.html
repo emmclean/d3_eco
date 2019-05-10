@@ -186,10 +186,16 @@ function ready(error, world, places) {
   
     svg.append("g").attr("class","lines")
         .selectAll(".lines").data(places.features)
+      .on("load", (d) => {
+        var distance2 = Math.round(d3.geoDistance(d.geometry.coordinates, bergamo) * 6371 * 0.115);
+        var lineWidth2 = Math.round((distance2 / 1900) * 10);
+        d3.select(".lines").select("#" + name).style("stroke-width", lineWidth2)
+      })
       .enter().append("path")
         .attr("class", "lines")
         .attr("id", d => stripWhitespace(d.properties.name))
         .attr("d", d => lineToBergamo(d));
+
 
 
     svg.append("g").attr("class","labels")
@@ -197,11 +203,6 @@ function ready(error, world, places) {
       .enter().append("text")
       .attr("class", "label")
       .text(d => d.properties.name)
-      .on("load", (d) => {
-        var distance2 = Math.round(d3.geoDistance(d.geometry.coordinates, bergamo) * 6371 * 0.115);
-        var lineWidth2 = Math.round((distance2 / 1900) * 10);
-        d3.select(".lines").select("#" + name).style("stroke-width", lineWidth2)
-      })
       .on("mouseover", (d) => {
         var distance = Math.round(d3.geoDistance(d.geometry.coordinates, bergamo) * 6371 * 0.115);
         var lineWidth = Math.round((distance / 1900) * 10);
