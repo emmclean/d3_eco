@@ -192,7 +192,7 @@ function ready(error, world, places) {
         .attr("class", "lines")
         .attr("id", d => stripWhitespace(d.properties.name))
         .attr("d", d => lineToBergamo(d))
-        .select(".lines").select("#" + name).style("stroke-width", 40);
+        .att(".lines").select("#" + name).style("stroke-width", 40);
 
 
     svg.append("g").attr("class","labels")
